@@ -1,10 +1,8 @@
-from operator import pos
 from flask import Blueprint, request, flash, render_template
 from flask.helpers import url_for
 from werkzeug.utils import redirect
 from .models import Post, User
-from . import create_app, db
-from werkzeug.security import generate_password_hash, check_password_hash
+from . import db
 from flask_login import login_required, current_user
 
 posts = Blueprint('posts', __name__)
