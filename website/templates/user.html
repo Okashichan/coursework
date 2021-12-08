@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Домівка{% endblock %}
+{% set page = '/user' %}
+
+{% block content %}
+<div class="container p-2">
+    <div class="bg-light p-5 rounded">
+      <h1>Сторінка користувача <strong>{{ user_page.login }}</strong></h1>
+      <img    
+            class="rounded float-end"
+            src="{{ user_page.avatar(128) }}"
+            width="128"
+            height="128"
+        />
+        <p class="lead">Пошта: {{ user_page.email }}</p>
+        <p class="lead">Останній раз був на сайті: {{ user_page.last_seen }}</p>
+    </div>
+</div>
+{% endblock %}
