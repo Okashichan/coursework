@@ -53,7 +53,7 @@ def users_list():
     return render_template('users.html', users=users, user=current_user)
 
 
-@users.route('/users/<usr>/delete')
+@users.route('/users/<int:usr>/delete')
 @login_required
 def delete_user(usr):
     if not current_user.is_admin:

@@ -12,8 +12,3 @@ def index():
 @views.route('/gallery')
 def gallery():
     return render_template('gallery.html', user=current_user)
-
-
-@views.route('/news')
-def news():
-    return render_template('news.html', user=current_user)

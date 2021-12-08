@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Користувачі{% endblock %}
+{% set usrs = '/users' %}
+
+{% block content %}
+<div class="table-responsive-xl">
+<table class="table text-center">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">head</th>
+        <th scope="col">created by</th>
+        <th scope="col">creation date</th>
+        {% if user.is_admin %}
+            <th scope="col">edit</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in news_posts %}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{p.head}}</td>
+        <td>
+            <a href="/user/{{created_by[loop.index-1].login}}" class="link-info">{{created_by[loop.index-1].login}}</a>
+        </td>
+        <td>{{p.date}}</td>
+        {% if user.is_admin %}
+        <td>
+          <a href="posts/{{p.id}}/edit" class="btn btn-warning" role="button">Редагувати</a>
+          <a href="posts/{{p.id}}/delete" class="btn btn-danger" role="button">Видалити</a>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+  {% if user.is_admin %}
+  <a href="/post-create" class="btn btn-success" role="button">Додати пост</a>
+  {% endif %}
+{% endblock %}

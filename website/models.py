@@ -4,7 +4,7 @@ from sqlalchemy.sql import func
 from hashlib import md5
 from datetime import datetime
 
-class Note(db.Model):
+class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     head = db.Column(db.String(1000))
     data = db.Column(db.String(10000))
@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(160))
     is_admin = db.Column(db.Boolean())
     last_seen = db.Column(db.DateTime, default=datetime.utcnow())
-    notes = db.relationship('Note')
+    notes = db.relationship('Post')
 
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()

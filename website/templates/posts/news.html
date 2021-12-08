@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Новини{% endblock %}
+{% set login = '/login' %}
+
+{% block content %}
+    {% for post in news_posts %}
+    <div class="container-fluid p-2">
+        <div class="p-3 border rounded">
+          <h1><strong>{{ post.head }}</strong></h1>
+          <br>
+            {% for p in post.data.split('\n') %}
+                <p class="text-justify">
+                    {{ p }}
+                </p>
+            {% endfor %}
+          <div class="d-flex justify-content-end">
+            <p class="text-sm">Створено: 
+                <a href="/user/{{created_by[loop.index-1].login}}" class="link-info">{{created_by[loop.index-1].login}}
+                </a>
+            </p>
+          </div>
+          <div class="d-flex justify-content-end">
+            <p class="text-sm"> {{ post.date }}  </p>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
