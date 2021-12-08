@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Логін{% endblock %}
+{% set login = '/login' %}
+{% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/signin.css') }}"
+/>
+{% endblock %} 
+{% block style %}
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+{% endblock %} 
+{% block content %}
+<div class="container p-2">
+    <main class="form-signin">
+        <form method="post">
+        <img
+            class="mx-auto d-block mb-5"
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            width="300"
+            height="114"
+        />
+        <h1 class="text-center h3 mb-3 fw-normal">Увійти до акаунта</h1>
+        <div class="form-floating">
+            <input
+                type="text"
+                class="form-control"
+                id="login"
+                name="login"
+                placeholder="name"
+            />
+            <label for="login">Логін/пошта</label>
+            </div>
+        <div class="form-floating">
+            <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Password"
+            />
+            <label for="password">Пароль</label>
+        </div>
+            <br>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">
+            Увійти
+        </button>
+    </main>
+</div>
+{% endblock %}

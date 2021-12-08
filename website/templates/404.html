@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Галерея{% endblock %}
+
+
+{% block content %}
+    <div class="container-fluid text-center">
+    <h1 class="display-1">404 - Сторінка не була знайдена.</h1>
+    <p class="lead">Те, що ви шукали, просто не існує.
+    <p><a class="btn btn-dark" href="{{ url_for('views.index') }}">перейти в якесь краще місце</a>
+    </div>
+{% endblock %}

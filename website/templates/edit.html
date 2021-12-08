@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}
+{% if user_edit %}
+Редагування
+{% else %}
+Створення
+{% endif %}
+{% endblock %}
+{% set edit = '/edit' %}
+
+{% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/signin.css') }}"
+/>
+{% endblock %}
+
+{% block content %}
+<main class="form-signin">
+<form method="post">
+    <h1 class="text-center h3 mb-3 fw-normal">
+        {% if user_edit %}
+        Редагування
+        {% else %}
+        Створення
+        {% endif %}
+    </h1>
+    {% if user.is_admin %}
+    <h5 class="text-center">ADMIN</h5>
+    {% else %}
+    <h5 class="text-center">NOT ADMIN</h5>
+    {% endif %}
+    <div class="form-floating">
+        <input
+            type="text"
+            class="form-control"
+            id="login"
+            name='login'
+            value='{{user_edit.login if user_edit}}'
+            placeholder="name"
+        />
+        <label for="login">Логін</label>
+        </div>
+    <div class="form-floating">
+        <input
+        type="email"
+        class="form-control"
+        id="email"
+        name='email'
+        value='{{user_edit.email if user_edit}}'
+        placeholder="name@example.com"
+        />
+        <label for="email">Email-адреса</label>
+    </div>
+    <div class="form-floating">
+        <input
+        type="password"
+        class="form-control"
+        id="password"
+        name='password'
+        placeholder="Password"
+        />
+        <label for="password">Пароль</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="admin" name="admin" {% if user_edit and user_edit.is_admin %}checked{% endif %}>
+        <label class="form-check-label" for="admin">
+          Адмін
+        </label>
+      </div>
+    <br>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">
+        {% if user_edit %}
+        Оновити дані
+        {% else %}
+        Створити
+        {% endif %}
+    </button>
+</main>
+{% endblock %}
