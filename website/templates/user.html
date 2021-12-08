@@ -20,7 +20,9 @@
     <div class="bg-light p-5 rounded">
         <h1>Пости</strong></h1>
         {% for p in user_page.notes %}
-            <p class="lead"> {{ p.head }} </p>
+            <a href="/news/{{p.id}}" class="link-info">
+                <p class="lead"> {{ p.head }} </p>
+            </a>
         {% endfor %}
     </div>
 </div>
