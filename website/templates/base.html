@@ -115,7 +115,7 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %} {% for category, message in messages %} {% if category ==
     'error' %}
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end p-3">
       <div class="alert alert-danger alter-dismissable fade show" role="alert">
         {{ message }}
         <button
