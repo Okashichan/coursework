@@ -64,7 +64,7 @@ def delete_user(usr):
     return redirect(url_for('users.users_list'))
 
 
-@users.route('/users/<usr>/edit', methods=['GET', 'POST'])
+@users.route('/users/<int:usr>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_user(usr):
     if not current_user.is_admin:
@@ -78,16 +78,25 @@ def edit_user(usr):
         admin = request.form.getlist('admin')
         admin = True if admin else False
 
-        if User.query.filter_by(email=email).first():
-            flash('Користувач з такою поштою вже існує!', category='error')
-            return redirect(url_for('users.edit_user', usr=usr))
+        if login == user_edit.login:
+            user_edit.login = login
         elif User.query.filter_by(login=login).first():
             flash('Користувач з таким іменем вже існує!', category='error')
             return redirect(url_for('users.edit_user', usr=usr))
+        else:
+            user_edit.login = login
 
-        user_edit.login = login
-        user_edit.email = email
-        user_edit.password = generate_password_hash(password, method='sha256')
+        if email == user_edit.email:
+            user_edit.email = email
+        elif User.query.filter_by(email=email).first():
+            flash('Користувач з такою поштою вже існує!', category='error')
+            return redirect(url_for('users.edit_user', usr=usr))
+        else:
+            user_edit.email = email
+
+        if password:
+            user_edit.password = generate_password_hash(password, method='sha256')
+
         user_edit.is_admin = admin
         db.session.commit()
         flash('Акаунт було відредаговано.', category='success')
