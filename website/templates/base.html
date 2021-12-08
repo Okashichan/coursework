@@ -56,9 +56,16 @@
                 {% if user and user.is_authenticated %}
                 <li class="nav-item">
                   <a
+                    {% if page%}class="nav-link active"{% else %}class="nav-link"{% endif %}href="/user/{{user.login}}"
+                  >
+                    Профіль
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
                     {% if home%}class="nav-link active"{% else %}class="nav-link"{% endif %}href="/home"
                   >
-                    Домівка
+                    Редагування
                   </a>
                 </li>
                 <li class="nav-item">
