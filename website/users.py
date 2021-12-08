@@ -29,6 +29,9 @@ def home():
         elif User.query.filter_by(email=email).first():
             flash('Користувач з такою поштою вже існує!', category='error')
             return redirect(url_for('users.home'))
+        elif User.query.filter_by(login=login).first():
+            flash('Користувач з таким іменем вже існує!', category='error')
+            return redirect(url_for('users.home'))
         else:
             current_user.login = login
             current_user.email = email
@@ -77,7 +80,10 @@ def edit_user(usr):
 
         if User.query.filter_by(email=email).first():
             flash('Користувач з такою поштою вже існує!', category='error')
-            return redirect(url_for('users.edit_user', usr = usr))
+            return redirect(url_for('users.edit_user', usr=usr))
+        elif User.query.filter_by(login=login).first():
+            flash('Користувач з таким іменем вже існує!', category='error')
+            return redirect(url_for('users.edit_user', usr=usr))
 
         user_edit.login = login
         user_edit.email = email
@@ -104,6 +110,9 @@ def add_user():
         if User.query.filter_by(email=email).first():
             flash('Користувач з такою поштою вже існує!', category='error')
             return redirect(url_for('users.add_user'))
+        elif User.query.filter_by(login=login).first():
+            flash('Користувач з таким іменем вже існує!', category='error')
+            return redirect(url_for('users.add_user'))
 
         new_user = User(login=login, email=email, password=generate_password_hash(password, method='sha256'), is_admin=admin)
         db.session.add(new_user)
@@ -112,3 +121,11 @@ def add_user():
 
         return redirect(url_for('users.users_list'))
     return render_template('edit.html', user=current_user)
+
+
+@users.route('/user/<login>')
+@login_required
+def user(login):
+    user_page = User.query.filter_by(login=login).first()
+
+    return render_template('user.html', user=current_user, user_page=user_page)

@@ -21,7 +21,7 @@
       {% for u in users %}
       <tr>
         <th scope="row">{{loop.index}}</th>
-        <td>{{u.login}}</td>
+        <td><a href="/user/{{u.login}} " class="link-info">{{u.login}}</a></td>
         <td>{{u.email}}</td>
         <td>{{u.is_admin}}</td>
         <td>{{u.last_seen}}</td>

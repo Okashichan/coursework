@@ -91,7 +91,7 @@
     </header>
 
     {% if user %}
-    {% if user.is_admin and (home or usrs or edit) %}
+    {% if user.is_admin and (home or usrs or edit or page) %}
     <div class="d-flex justify-content-end">
       <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="/home">Адміністрування</a>
