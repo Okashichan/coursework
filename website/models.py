@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     login = db.Column(db.String(160))
     email = db.Column(db.String(320), unique=True)
     password = db.Column(db.String(160))
-    is_admin = db.Column(db.Boolean())
+    is_admin = db.Column(db.Boolean(), default=False)
     last_seen = db.Column(db.DateTime, default=datetime.utcnow())
     notes = db.relationship('Post')
 

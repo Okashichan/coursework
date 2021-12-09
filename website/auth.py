@@ -54,7 +54,7 @@ def sign_up():
         elif len(password) < 7:
             flash('Пароль повинен містити 7 і більше символів.', category='error')
         else:
-            new_user = User(login=login, email=email, password=generate_password_hash(password, method='sha256'), is_admin=False)
+            new_user = User(login=login, email=email, password=generate_password_hash(password, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             #login_user(user)
