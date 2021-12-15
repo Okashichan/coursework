@@ -1,4 +1,5 @@
 /env/*
 /__pycache__/*
-/website/__pycache__/*
+/website/controllers/__pycache__/*
+/website/__pycache__/
 /website/*.db
