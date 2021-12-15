@@ -85,11 +85,8 @@ def edit_post(id):
 
 @posts.route('/news/<int:id>')
 def post(id):
-    if Post.query.filter_by(id=id).first():
-        post = Post.query.filter_by(id=id).first()
-    else:
-        flash('Такого поста не існує', category='error')
-        redirect(url_for('posts.news'))
+    post = Post.query.filter_by(id=id).first_or_404()
+    
     created_by = User.query.filter_by(id=post.user_id).first()
 
     return render_template('posts/post.html', user=current_user, post=post, created_by=created_by)
