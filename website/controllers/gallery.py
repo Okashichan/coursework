@@ -37,12 +37,13 @@ def gallery_add():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             name = filename.split('.')
+            img_name = random_string()
             ext = name[1]
-            img = random_string()+'.'+ext
-            img = os.path.join(current_app.config['UPLOAD_FOLDER'], img)
+            img_name = img_name+'.'+ext
+            img = os.path.join(current_app.config['UPLOAD_FOLDER'], img_name)
             file.save(img)
 
-        new_image = Gallery(text=text, img=img, ext=ext, user_id=current_user.id)
+        new_image = Gallery(text=text, img=img_name, ext=ext, user_id=current_user.id)
 
         db.session.add(new_image)
         db.session.commit()

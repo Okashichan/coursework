@@ -18,8 +18,8 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(160))
     is_admin = db.Column(db.Boolean(), default=False)
     last_seen = db.Column(db.DateTime, default=func.now())
-    post = db.relationship('Post')
-    gallery = db.relationship('Gallery')
+    notes = db.relationship('Post')
+    images = db.relationship('Gallery')
 
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
