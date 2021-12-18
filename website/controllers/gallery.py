@@ -65,3 +65,50 @@ def gallery_dashboard():
     return render_template('gallery/dashboard.html', user=current_user,
                                                      gal=gallery, 
                                                      created_by=created_by)
+
+
+@gallery.route('/gallery/<int:id>/delete', methods=['GET', 'POST'])
+@login_required
+def gallery_delete(id):
+    if not current_user.is_admin:
+        return redirect(url_for('views.index'))
+
+    img = Gallery.query.filter_by(id=id).first()
+    img_remove = os.path.join(current_app.config['UPLOAD_FOLDER'], img.img)
+    if os.path.isfile(img_remove):
+        Gallery.query.filter_by(id=id).delete()
+        os.remove(img_remove)
+    else:
+        flash('Такої картинки не існує.', category='success')
+        return redirect(url_for('gallery.gallery_dashboard'))
+    db.session.commit()
+    flash('Картинку було видалено.', category='success')
+
+    return redirect(url_for('gallery.gallery_dashboard'))
+
+
+@gallery.route('/gallery/<int:id>/edit', methods=['GET', 'POST'])
+@login_required
+def gallery_edit(id):
+    if not current_user.is_admin:
+        return redirect(url_for('views.index'))
+
+    img = Gallery.query.filter_by(id=id).first()
+    img_remove = os.path.join(current_app.config['UPLOAD_FOLDER'], img.img)
+    old_img_name = img.img
+
+    if request.method == 'POST':
+        file = request.files['gal']
+        text = request.form.get('text')
+        if os.path.isfile(img_remove):
+            if file:
+                os.remove(img_remove)
+                new_img = os.path.join(current_app.config['UPLOAD_FOLDER'], old_img_name)
+                file.save(new_img)
+
+            img.text = text
+            db.session.commit()
+            flash('Дані було відредаговано.', category='success')
+            return redirect(url_for('gallery.gallery_dashboard'))      
+
+    return render_template('gallery/gallery_edit.html', user=current_user, img=img)

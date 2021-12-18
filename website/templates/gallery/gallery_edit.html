@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Редагувати картинку{% endblock %}
+{% set usrs = '/users' %}
+
+{% block content %}
+<div class="container">
+    <main class="form">
+        <form method="post" enctype="multipart/form-data">
+            <h1>Поточна картинка</h1>
+            <img
+                class="mx-auto d-block mb-5 p-1"
+                src="{{ url_for('static', filename='gallery/' + img.img) }}"
+                width="25%"
+                height="25%"
+            />
+            <div>
+                <label for="gal" class="form-label"><h1>Виберіть нову картинку</h1></label>
+                <input class="form-control form-control-lg" id="gal" name="gal" type="file">
+            </div>
+            <br>
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="text"
+                    name="text"
+                    value="{{img.text}}"
+                    placeholder="name"
+                />
+                <label for="text">Опис за бажанням</label>
+            </div>
+            <br>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">
+                Редагувати
+            </button>
+    </main>
+</div>
+{% endblock %}
