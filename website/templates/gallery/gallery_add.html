@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Логін{% endblock %}
+{% set login = '/login' %}
+{% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/signin.css') }}"
+/>
+{% endblock %} 
+{% block style %}
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+{% endblock %} 
+{% block content %}
+<div class="container">
+    <main class="form">
+        <form method="post" enctype="multipart/form-data">
+            <div>
+                <label for="gal" class="form-label"><h1>Виберіть картинку</h1></label>
+                <input class="form-control form-control-lg" id="gal" name="gal" type="file">
+            </div>
+            <div class="form-floating">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="text"
+                    name="text"
+                    placeholder="name"
+                />
+                <label for="text">Опис за бажанням</label>
+            </div>
+            <br>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">
+                Завантажити
+            </button>
+    </main>
+</div>
+{% endblock %}
