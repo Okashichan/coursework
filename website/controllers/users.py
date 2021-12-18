@@ -38,8 +38,8 @@ def home():
             current_user.password = generate_password_hash(password2, method='sha256')
             flash('Дані було оновлено!', category='success')
             db.session.commit()
-            return render_template('home.html', user=current_user)
-    return render_template('home.html', user=current_user)
+            return render_template('users/home.html', user=current_user)
+    return render_template('users/home.html', user=current_user)
 
 
 @users.route('/users', methods=['GET', 'POST'])
@@ -50,7 +50,7 @@ def users_list():
 
     users = User.query.all()
 
-    return render_template('users.html', users=users, user=current_user)
+    return render_template('users/users.html', users=users, user=current_user)
 
 
 @users.route('/users/<int:usr>/delete')
@@ -101,7 +101,7 @@ def edit_user(usr):
         db.session.commit()
         flash('Акаунт було відредаговано.', category='success')
         return redirect(url_for('users.users_list'))
-    return render_template('edit.html', user=current_user, user_edit=user_edit)
+    return render_template('users/edit.html', user=current_user, user_edit=user_edit)
 
 
 @users.route('/users/add', methods=['GET', 'POST'])
@@ -129,7 +129,7 @@ def add_user():
         flash('Акаунт було створено!', category='success')
 
         return redirect(url_for('users.users_list'))
-    return render_template('edit.html', user=current_user)
+    return render_template('users/edit.html', user=current_user)
 
 
 @users.route('/user/<login>')
@@ -137,6 +137,4 @@ def add_user():
 def user(login):
     user_page = User.query.filter_by(login=login).first_or_404()
 
-    
-
-    return render_template('user.html', user=current_user, user_page=user_page)
+    return render_template('users/user.html', user=current_user, user_page=user_page)

@@ -23,7 +23,7 @@ def login():
                 flash('Щось пішло не так. Попробуйте знову.', category='error')
         else:
             flash('Такого користувача не існує.', category='error')
-    return render_template('login.html', user=current_user)
+    return render_template('auth/login.html', user=current_user)
 
 
 @auth.route('/logout')
@@ -61,4 +61,4 @@ def sign_up():
             flash('Акаунт було створено!', category='success')
             return redirect(url_for('auth.login'))
 
-    return render_template('signUp.html', user=current_user)
+    return render_template('auth/signUp.html', user=current_user)
