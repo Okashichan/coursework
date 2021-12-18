@@ -19,10 +19,16 @@
       {% for g in gal %}
       <tr>
         <th scope="row">{{loop.index}}</th>
-        <td>{{g.text}}</td>
         <td>
-          <a href="/static/gallery/{{g.img}}" class="link-info">{{g.img}}</a>
+          <a href="/static/gallery/{{g.img}}" class="link-info">
+            {% if g.text %}
+              {{g.text}}
+            {% else %}
+              ...
+            {% endif %}
+          </a>
         </td>
+        <td>{{g.img}}</td>
         <td>{{g.date}}</td>
         <td>
             <a href="/user/{{created_by[loop.index-1].login}}" class="link-info">{{created_by[loop.index-1].login}}</a>
