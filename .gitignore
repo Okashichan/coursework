@@ -3,3 +3,4 @@
 /website/controllers/__pycache__/
 /website/__pycache__/
 /website/*.db
+/website/static/gallery/*

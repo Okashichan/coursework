@@ -6,23 +6,28 @@ from datetime import datetime
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
+UPLOAD_FOLDER = 'website/static/gallery/'
+ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'gif'}
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = '5YNpad34DOdWprjXWeTzbujT2rqSHSYx'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     db.init_app(app)
 
     from website.controllers.views import views
     from website.controllers.auth import auth
     from website.controllers.users import users
     from website.controllers.posts import posts
+    from website.controllers.gallery import gallery
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(users, url_prefix='/')
     app.register_blueprint(posts, url_prefix='/')
+    app.register_blueprint(gallery, url_prefix='/')
 
     from .models import User, Post
 
