@@ -26,10 +26,10 @@ def home():
             flash('Паролі не співпадають.', category='error')
         elif len(password2) < 7:
             flash('Для редагування даних введіть пароль два рази.', category='error')
-        elif not User.query.filter_by(email=email).first():
+        elif len(User.query.filter_by(email=email).all()) == 1:
             flash('Користувач з такою поштою вже існує!', category='error')
             return redirect(url_for('users.home'))
-        elif not User.query.filter_by(login=login).first():
+        elif len(User.query.filter_by(login=login).all()) == 1:
             flash('Користувач з таким іменем вже існує!', category='error')
             return redirect(url_for('users.home'))
         else:
