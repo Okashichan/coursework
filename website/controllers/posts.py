@@ -37,7 +37,7 @@ def news():
                                               created_by=created_by)
 
 
-@posts.route('/dashboard')
+@posts.route('/post-dashboard')
 @login_required
 def dashboard():
     news_posts = Post.query.all()

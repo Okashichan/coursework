@@ -8,29 +8,27 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">head</th>
-        <th scope="col">created by</th>
+        <th scope="col">text</th>
+        <th scope="col">image name</th>
         <th scope="col">creation date</th>
-        {% if user.is_admin %}
-            <th scope="col">edit</th>
-        {% endif %}
+        <th scope="col">created by</th>
+        <th scope="col">edit</th>
       </tr>
     </thead>
     <tbody>
-      {% for p in news_posts %}
+      {% for g in gal %}
       <tr>
         <th scope="row">{{loop.index}}</th>
-        <td>
-          <a href="/news/{{loop.index}}" class="link-info">{{p.head}}</a>
-        </td>
+        <td>{{g.text}}</td>
+        <td>{{g.img}}</td>
+        <td>{{g.date}}</td>
         <td>
             <a href="/user/{{created_by[loop.index-1].login}}" class="link-info">{{created_by[loop.index-1].login}}</a>
         </td>
-        <td>{{p.date}}</td>
         {% if user.is_admin %}
         <td>
-          <a href="posts/{{p.id}}/edit" class="btn btn-warning" role="button">Редагувати</a>
-          <a href="posts/{{p.id}}/delete" class="btn btn-danger" role="button">Видалити</a>
+          <a href="gallery/{{g.id}}/edit" class="btn btn-warning" role="button">Редагувати</a>
+          <a href="gallery/{{g.id}}/delete" class="btn btn-danger" role="button">Видалити</a>
         </td>
         {% endif %}
       </tr>
@@ -39,6 +37,6 @@
   </table>
 </div>
   {% if user.is_admin %}
-  <a href="/post-create" class="btn btn-success" role="button">Додати пост</a>
+  <a href="/gallery-add" class="btn btn-success" role="button">Додати картинку</a>
   {% endif %}
 {% endblock %}

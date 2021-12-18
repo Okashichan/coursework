@@ -1,29 +1,7 @@
 {% extends 'base.html' %}
-{% block title %}Логін{% endblock %}
-{% set login = '/login' %}
-{% block css %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/signin.css') }}"
-/>
-{% endblock %} 
-{% block style %}
-<style>
-  .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
+{% block title %}Додати картинку{% endblock %}
+{% set usrs = '/users' %}
 
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
-    }
-  }
-</style>
-{% endblock %} 
 {% block content %}
 <div class="container">
     <main class="form">
@@ -32,6 +10,7 @@
                 <label for="gal" class="form-label"><h1>Виберіть картинку</h1></label>
                 <input class="form-control form-control-lg" id="gal" name="gal" type="file">
             </div>
+            <br>
             <div class="form-floating">
                 <input
                     type="text"

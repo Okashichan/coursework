@@ -1,7 +1,7 @@
 import os
 from flask import Blueprint, request, flash, redirect, url_for, render_template, current_app
 from werkzeug.utils import secure_filename
-from ..models import Gallery
+from ..models import Gallery, User
 from .. import db, ALLOWED_EXTENSIONS
 from flask_login import login_required, current_user
 import random  
@@ -51,3 +51,17 @@ def gallery_add():
         return redirect(url_for('gallery.gallery_add'))  
 
     return render_template('gallery/gallery_add.html', user=current_user)
+
+
+@gallery.route('/gallery-dashboard', methods=['GET', 'POST'])
+@login_required
+def gallery_dashboard():
+    gallery = Gallery().query.all()
+    created_by = list()
+
+    for g in gallery:
+        created_by.append(User.query.filter_by(id=g.user_id).first())
+
+    return render_template('gallery/dashboard.html', user=current_user,
+                                                     gal=gallery, 
+                                                     created_by=created_by)

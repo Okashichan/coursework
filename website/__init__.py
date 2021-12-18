@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager, current_user
 from datetime import datetime
+from sqlalchemy.sql import func
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
@@ -50,7 +51,7 @@ def create_app():
     @app.before_request
     def before_request():
         if current_user:
-            current_user.last_seen = datetime.utcnow()
+            current_user.last_seen = func.now()
             db.session.commit()
 
     return app
