@@ -1,5 +1,5 @@
-from flask import Blueprint, request, flash, render_template
-from flask.helpers import url_for
+from flask import Blueprint, request, flash, render_template, jsonify
+from flask.helpers import make_response, url_for
 from werkzeug.utils import redirect
 from ..models import Post, User
 from .. import db
@@ -90,3 +90,27 @@ def post(id):
     created_by = User.query.filter_by(id=post.user_id).first()
 
     return render_template('posts/post.html', user=current_user, post=post, created_by=created_by)
+
+
+q = 3
+
+@posts.route('/post-load')
+def post_load():
+
+    posts = Post.query.all()
+    posts_json = list()
+    for p in posts:
+       posts_json.append([p.id, p.head, p.data.split('\n')[0], str(p.date), User.query.filter_by(id=p.user_id).first().id, User.query.filter_by(id=p.user_id).first().login])
+
+    if request.args:
+
+        counter = int(request.args.get('c'))
+
+        if counter == 0:
+            res = make_response(jsonify(posts_json[0:q]), 200)
+        elif counter == len(posts_json):
+            res = make_response(jsonify({}), 200)
+        else:
+            res = make_response(jsonify(posts_json[counter:counter+q]), 200)
+
+    return res
