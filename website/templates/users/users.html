@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}Користувачі{% endblock %}
 {% set usrs = '/users' %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dataTables.bootstrap5.min.css') }}"/>
+{% endblock %}
 
 {% block content %}
 <div class="table-responsive-xl">
-<table class="table text-center">
+<table id="data" class="table text-center">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -41,4 +44,28 @@
   {% if user.is_admin %}
   <a href="users/add" class="btn btn-success" role="button">Додати акаунт</a>
   {% endif %}
+
+  {% block script %}
+  <script type="text/javascript" src="{{ url_for('static', filename='javascript/jquery-3.6.0.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='javascript/datatables.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='javascript/dataTables.bootstrap5.min.js') }}"></script>
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          null,
+          {searchable: true},
+          {searchable: true},
+          null,
+          null,
+          null],
+        stateSave: true,
+        "bDestroy": true,
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.11.3/i18n/uk.json'
+        }
+      })
+    });
+  </script>
+  {% endblock %}
 {% endblock %}
