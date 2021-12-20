@@ -54,11 +54,11 @@
       $('#data').DataTable({
         columns: [
           null,
-          {searchable: true},
-          {searchable: true},
-          null,
-          null,
-          null],
+          {orderable: true, searchable: true},
+          {orderable: true, searchable: true},
+          {orderable: true, searchable: true},
+          {orderable: true, searchable: true},
+          {orderable: false, searchable: false}],
         stateSave: true,
         "bDestroy": true,
         language: {
