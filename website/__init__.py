@@ -2,13 +2,14 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager, current_user
-from datetime import datetime
 from sqlalchemy.sql import func
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
 UPLOAD_FOLDER = 'website/static/gallery/'
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'gif'}
+
 
 def create_app():
     app = Flask(__name__)
@@ -16,6 +17,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    
     db.init_app(app)
 
     from website.controllers.views import views
@@ -30,8 +32,6 @@ def create_app():
     app.register_blueprint(posts, url_prefix='/')
     app.register_blueprint(gallery, url_prefix='/')
 
-    from .models import User, Post
-
     create_database(app)
 
     login_manager = LoginManager()
@@ -39,6 +39,8 @@ def create_app():
     login_manager.login_message = 'Ви повинні авторизуватись щоб отримати доступ до цієї сторінки!'
     login_manager.login_message_category = 'error'
     login_manager.init_app(app)
+
+    from website.models import User
 
     @login_manager.user_loader
     def load_user(id):

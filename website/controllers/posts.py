@@ -92,7 +92,7 @@ def post(id):
     return render_template('posts/post.html', user=current_user, post=post, created_by=created_by)
 
 
-q = 3
+q = 5
 
 @posts.route('/post-load')
 def post_load():
