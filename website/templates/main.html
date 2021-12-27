@@ -3,5 +3,17 @@
 {% set main = '/' %}
 
 {% block content %}
-    <h1>Головна</h1>
+<div class="container-fluid text-center mt-1">
+    <h1 class="display-1">Хто ми?</h1>
+    <img src="{{ url_for('static', filename='images/illustaror.jpg') }}" class="img-responsive rounded-circle" style="display:inline" width="350" height="350">
+    <p class="lead">Ми офіційний фан-клуб "Медка"</p>
+</div>
+<hr class="mt-5">
+<div class="container-fluid text-center">
+    <h1 class="display-2">Що ми робимо?</h1>
+    <p class="lead">Ведемо блог новин з життя художника, викладаємо останні роботи. <br>Є якісь побажання?</p>
+    <a href="#" class="btn btn-primary">
+        Зв'язатися з нами
+    </a>
+</div>
 {% endblock %}
