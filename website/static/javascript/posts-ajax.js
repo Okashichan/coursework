@@ -19,7 +19,7 @@ function loadItems(){
                 template_clone.querySelector('#data').innerHTML = data[i][2];
                 template_clone.querySelector('#date').innerHTML = data[i][3];
                 template_clone.querySelector('#user_id').href+=data[i][4];
-                template_clone.querySelector('#user_id').innerHTML+=data[i][5];
+                template_clone.querySelector('#user_id').innerHTML+=data[i][4];
                 scroller.appendChild(template_clone);
                 counter+=1;
             }

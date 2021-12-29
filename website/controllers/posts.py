@@ -100,7 +100,9 @@ def post_load():
     posts = Post.query.all()
     posts_json = list()
     for p in posts:
-       posts_json.append([p.id, p.head, p.data.split('\n')[0], str(p.date), User.query.filter_by(id=p.user_id).first().id, User.query.filter_by(id=p.user_id).first().login])
+       posts_json.append([p.id, p.head, p.data.split('\n')[0], str(p.date), User.query.filter_by(id=p.user_id).first().login])
+
+    posts_json.reverse()
 
     if request.args:
 
@@ -112,5 +114,7 @@ def post_load():
             res = make_response(jsonify({}), 200)
         else:
             res = make_response(jsonify(posts_json[counter:counter+q]), 200)
+
+    
 
     return res
