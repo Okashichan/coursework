@@ -123,8 +123,8 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %} {% for category, message in messages %} {% if category ==
     'error' %}
-    <div class="d-flex justify-content-end p-3">
-      <div class="alert alert-danger alter-dismissable fade show" role="alert">
+    <div class="d-flex justify-content-end">
+      <div class="alert alert-danger alter-dismissable fade show p-3" role="alert">
         {{ message }}
         <button
           type="button"
@@ -134,8 +134,8 @@
       </div>
     </div>
     {% else %}
-    <div class="d-flex justify-content-end p-3">
-      <div class="alert alert-success alter-dismissable fade show" role="alert">
+    <div class="d-flex justify-content-end">
+      <div class="alert alert-success alter-dismissable fade show p-3" role="alert">
         {{ message }}
         <button
           type="button"
