@@ -54,6 +54,10 @@ def users_list():
 @users.route('/users/<int:usr>/delete')
 @login_required
 def delete_user(usr):
+    if usr == 1:
+        flash('Неможливо видалити головного адміністратора!', category='error')
+        return redirect(url_for('users.users_list'))
+
     if not current_user.is_admin:
         return redirect(url_for('views.index'))
     User.query.filter_by(id=usr).delete()
@@ -65,6 +69,10 @@ def delete_user(usr):
 @users.route('/users/<int:usr>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_user(usr):
+    if usr == 1:
+        flash('Неможливо редагувати дані головного адміністратора!', category='error')
+        return redirect(url_for('users.users_list'))
+
     if not current_user.is_admin:
         return redirect(url_for('views.index'))
     user_edit = User.query.filter_by(id=usr).first()
