@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Чат{% endblock %}
 {% set chat = '/chat' %}
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+{% endblock %}
 
 {% block content %}
 <form class="row gy-2 gx-3 d-flex justify-content-center p-2" method="post">
@@ -19,10 +22,20 @@
     </div>
 </form>
 
-{% for message in chats %}
+<div id="scroller">
+  <template id="post_template">
     <div class="container border mt-1 mb-1">
-        <p class="font-monospace"> <a class="link-info" href="/user/{{message.login}}">{{message.login}}</a>: {{message.text}}</p> <div class="text-end">{{message.date}}</div>
+        <p id="text" class="font-monospace"> <a id="user_login" class="link-info" href="/user/"></a>:</p> <div id="date" class="text-end"></div>
     </div>
-{% endfor %}
+  </template>
+</div>
+
+<div class="d-flex justify-content-center mb-3" id="sentinel">
+  <div class="spinner-border" role="status"></div>
+</div>
+
+{% block script %}
+<script src="{{ url_for('static', filename='javascript/messages-ajax.js') }}"></script>
+{% endblock %}
 
 {% endblock %}

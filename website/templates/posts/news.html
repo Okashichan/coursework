@@ -38,7 +38,7 @@
   <div class="d-flex justify-content-center mb-3" id="sentinel">
     <div class="spinner-border" role="status"></div>
   </div>
-    {% block script %}
-      <script src="{{ url_for('static', filename='javascript/posts-ajax.js') }}"></script>
-    {% endblock %}
+{% block script %}
+  <script src="{{ url_for('static', filename='javascript/posts-ajax.js') }}"></script>
+{% endblock %}
 {% endblock %}

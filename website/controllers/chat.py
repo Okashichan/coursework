@@ -1,4 +1,5 @@
-from flask import Blueprint, request, flash, redirect, url_for, render_template
+from flask import Blueprint, request, flash, redirect, url_for, render_template, jsonify
+from flask.helpers import make_response
 from ..models import Chat, User
 from .. import db
 from flask_login import login_required, current_user
@@ -50,3 +51,29 @@ def delete_user(id):
     db.session.commit()
     flash('Повідомлення було видалено.', category='success')
     return redirect(url_for('chat.chat_dashboard'))
+
+
+q = 15 
+
+@chat.route('/chat-load')
+def post_load():
+
+    chats = Chat.query.all()
+    chats_json = list()
+    for c in chats:
+       chats_json.append([c.login, ' '+c.text, str(c.date)])
+
+    chats_json.reverse()
+
+    if request.args:
+
+        counter = int(request.args.get('c'))
+
+        if counter == 0:
+            res = make_response(jsonify(chats_json[0:q]), 200)
+        elif counter == len(chats_json):
+            res = make_response(jsonify({}), 200)
+        else:
+            res = make_response(jsonify(chats_json[counter:counter+q]), 200)
+
+    return res
