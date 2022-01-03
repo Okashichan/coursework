@@ -1,5 +1,5 @@
 let scroller = document.querySelector('#scroller');
-let template = document.querySelector('#post_template');
+let template = document.querySelector('#message_template');
 let sentinel = document.querySelector('#sentinel');
 
 let counter = 0;

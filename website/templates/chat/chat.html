@@ -23,7 +23,7 @@
 </form>
 
 <div id="scroller">
-  <template id="post_template">
+  <template id="message_template">
     <div class="container border mt-1 mb-1">
         <p id="text" class="font-monospace"> <a id="user_login" class="link-info" href="/user/"></a>:</p> <div id="date" class="text-end"></div>
     </div>
@@ -35,7 +35,7 @@
 </div>
 
 {% block script %}
-<script src="{{ url_for('static', filename='javascript/messages-ajax.js') }}"></script>
+  <script src="{{ url_for('static', filename='javascript/messages-ajax.js') }}"></script>
 {% endblock %}
 
 {% endblock %}
