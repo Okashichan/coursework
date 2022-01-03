@@ -139,7 +139,6 @@ def add_user():
 
 
 @users.route('/user/<login>')
-@login_required
 def user(login):
     user_page = User.query.filter_by(login=login).first_or_404()
 

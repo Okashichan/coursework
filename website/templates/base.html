@@ -51,6 +51,13 @@
                   Галерея
                 </a>
               </li>
+              <li class="nav-item">
+                <a
+                  {% if chat %}class="nav-link active"{% else %}class="nav-link"{% endif %}href="/chat"
+                >
+                  Чат
+                </a>
+              </li>
             </ul>
             <div class="d-flex">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -113,6 +120,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/gallery-dashboard">Галерея</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/chat-dashboard">Чат</a>
             </li>
           </ul>
         </nav>

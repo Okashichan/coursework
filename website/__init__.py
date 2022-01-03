@@ -25,12 +25,14 @@ def create_app():
     from website.controllers.users import users
     from website.controllers.posts import posts
     from website.controllers.gallery import gallery
+    from website.controllers.chat import chat
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(users, url_prefix='/')
     app.register_blueprint(posts, url_prefix='/')
     app.register_blueprint(gallery, url_prefix='/')
+    app.register_blueprint(chat, url_prefix='/')
 
     create_database(app)
 

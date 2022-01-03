@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     last_seen = db.Column(db.DateTime, default=func.now())
     notes = db.relationship('Post')
     images = db.relationship('Gallery')
+    chats = db.relationship('Chat')
 
     def avatar(self, size):
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
@@ -34,3 +35,11 @@ class Gallery(db.Model):
     ext = db.Column(db.String(5))
     date = db.Column(db.DateTime, default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
+class Chat(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    login = db.Column(db.String(160))
+    text = db.Column(db.String(320))
+    date = db.Column(db.DateTime, default=func.now())

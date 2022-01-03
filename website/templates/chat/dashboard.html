@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Чат{% endblock %}
+{% set usrs = '/users' %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dataTables.bootstrap5.min.css') }}"/>
+{% endblock %}
+
+{% block content %}
+<div class="table-responsive-xl">
+<table id="data" class="table text-center">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">user id</th>
+        <th scope="col">login</th>
+        <th scope="col">text</th>
+        <th scope="col">date</th>
+        <th scope="col">edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for msg in chats %}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{msg.user_id}}</td>
+        <td>{{msg.login}}</td>
+        <td>{{msg.text}}</td>
+        <td>{{msg.date}}</td>
+        {% if user.is_admin %}
+        <td>
+          <a href="chat/{{msg.id}}/delete" class="btn btn-danger" role="button">Видалити</a>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+  {% block script %}
+  <script type="text/javascript" src="{{ url_for('static', filename='javascript/jquery-3.6.0.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='javascript/datatables.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='javascript/dataTables.bootstrap5.min.js') }}"></script>
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          null,
+          {orderable: true, searchable: true},
+          {orderable: true, searchable: true},
+          {orderable: true, searchable: true},
+          {orderable: true, searchable: true},
+          {orderable: true, searchable: true}],
+        stateSave: true,
+        "bDestroy": true,
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.11.3/i18n/uk.json'
+        }
+      })
+    });
+  </script>
+  {% endblock %}
+{% endblock %}

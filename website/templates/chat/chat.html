@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Чат{% endblock %}
+{% set chat = '/chat' %}
+
+{% block content %}
+<form class="row gy-2 gx-3 d-flex justify-content-center p-2" method="post">
+    <div class="col-auto">
+      <label class="visually-hidden" for="login">Нікнейм</label>
+      <input type="text" class="form-control" id="login" name="login" placeholder="Нікнейм" value="{{current_user.login}}">
+    </div>
+
+    <div class="col-sm-6">
+        <label class="visually-hidden" for="text">Повідомлення</label>
+        <input type="text" class="form-control" id="text" name="text" placeholder="Повідомлення">
+      </div>
+
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Відправити</button>
+    </div>
+</form>
+
+{% for message in chats %}
+    <div class="container border mt-1 mb-1">
+        <p class="font-monospace"> <a class="link-info" href="/user/{{message.login}}">{{message.login}}</a>: {{message.text}}</p> <div class="text-end">{{message.date}}</div>
+    </div>
+{% endfor %}
+
+{% endblock %}
