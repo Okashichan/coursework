@@ -23,7 +23,7 @@
       <tr>
         <th scope="row">{{loop.index}}</th>
         <td>{{msg.user_id}}</td>
-        <td>{{msg.login}}</td>
+        <td><a href="/user/{{msg.login}}" class="link-info">{{msg.login}}</a></td>
         <td>{{msg.text}}</td>
         <td>{{msg.date}}</td>
         {% if user.is_admin %}
