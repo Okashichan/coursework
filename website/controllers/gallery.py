@@ -42,6 +42,9 @@ def gallery_add():
             img_name = img_name+'.'+ext
             img = os.path.join(current_app.config['UPLOAD_FOLDER'], img_name)
             file.save(img)
+        else:
+            flash('Підримуються лише наступні формати файлів: jpg, jpeg, gif!', category='error')
+            return redirect(url_for('gallery.gallery_add'))
 
         new_image = Gallery(text=text, img=img_name, ext=ext, user_id=current_user.id)
 
@@ -100,6 +103,10 @@ def gallery_edit(id):
     if request.method == 'POST':
         file = request.files['gal']
         text = request.form.get('text')
+        if not allowed_file(file.filename):
+            flash('Підримуються лише наступні формати файлів: jpg, jpeg, gif!', category='error')
+            return redirect(url_for('gallery.gallery_edit', id=id))
+
         if os.path.isfile(img_remove):
             if file:
                 os.remove(img_remove)

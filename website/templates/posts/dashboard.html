@@ -24,7 +24,7 @@
       <tr>
         <th scope="row">{{loop.index}}</th>
         <td>
-          <a href="/news/{{loop.index}}" class="link-info">{{p.head}}</a>
+          <a href="/news/{{p.id}}" class="link-info">{{p.head}}</a>
         </td>
         <td>
             <a href="/user/{{created_by[loop.index-1].login}}" class="link-info">{{created_by[loop.index-1].login}}</a>
